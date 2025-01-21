@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Analysis for Manufacturing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+        }
+        .upload-form {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .result {
+            margin-top: 30px;
+            text-align: center;
+        }
+        input[type="file"] {
+            margin-top: 20px;
+        }
+        .message {
+            color: rgb(5, 5, 5);
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Predictive Analysis for Manufacturing</h1>
+            <p>Upload a CSV file to predict machine downtime or defects.</p>
+        </div>
+
+        <!-- Upload Form -->
+        <div class="upload-form">
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" required><br>
+                <button type="submit">Upload File</button>
+            </form>
+        </div>
+
+        <!-- Display success message after upload -->
+        {% if file_uploaded %}
+        <div class="message">
+            <p>File uploaded successfully!</p>
+        </div>
+
+        <!-- Show Train and Predict buttons after file upload -->
+        <div class="buttons">
+            <form action="/train" method="POST">
+                <button type="submit">Train Model</button>
+            </form>
+            <form action="/predict" method="POST">
+                <button type="submit">Make Prediction</button>
+            </form>
+        </div>
+        {% endif %}
+
+        <!-- Display model training result -->
+        {% if train_message %}
+        <div class="result">
+            <h2>Model Training Result:</h2>
+            <p class="message">{{ train_message|safe }}</p>
+        </div>
+        {% endif %}
+
+        <!-- Display result after prediction -->
+        {% if prediction %}
+        <div class="result">
+            <h2>Prediction Result:</h2>
+            <p><strong>Downtime:</strong> {{ prediction["Downtime"] }}</p>
+            <p><strong>Confidence:</strong> {{ prediction["Confidence"] }}</p>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="result">
+            <p class="error">{{ error }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
