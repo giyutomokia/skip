@@ -1,0 +1,71 @@
+# Predictive Analysis for Manufacturing
+
+This project provides a predictive analysis tool for manufacturing machines. The goal is to predict machine downtime based on provided data like temperature and run-time using machine learning.
+
+## Features:
+- Upload a CSV file with data for training a machine learning model.
+- Train a Logistic Regression model to predict machine downtime.
+- Make predictions on new data.
+
+## Setup Instructions:
+
+### Requirements:
+- Python 3.x
+- `Flask`
+- `scikit-learn`
+- `pandas`
+
+### Setup:
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/predictive-analysis-manufacturing.git
+    cd predictive-analysis-manufacturing
+    ```
+
+2. Create and activate a virtual environment (optional but recommended):
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate  # For Windows: venv\Scripts\activate
+    ```
+
+3. Install the required dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. Run the Flask application:
+    ```bash
+    python app.py
+    ```
+
+5. Open your browser and go to `http://127.0.0.1:5000/` to access the application.
+
+### Testing API Endpoints:
+You can test the following API endpoints locally using tools like Postman or curl.
+
+- **Upload Data** (POST request to `/upload`):
+    - Upload a CSV file to be used for training the model.
+
+- **Train Model** (POST request to `/train`):
+    - After uploading a file, use this endpoint to train the model.
+
+- **Make Prediction** (POST request to `/predict`):
+    - Use this endpoint to make predictions on new data.
+
+## Sample Dataset:
+
+A sample dataset `sample_dataset.csv` is included in this repository for testing. The dataset should have columns:
+- `Temperature`: Numeric value representing machine temperature.
+- `Run_Time`: Numeric value representing machine run-time.
+- `Downtime_Flag`: Target variable (0 or 1) indicating whether downtime occurred.
+
+---
+ API Testing:
+Once the application is up and running locally, you can test the API endpoints using tools like Postman or curl:
+
+Upload File: POST request to http://127.0.0.1:5000/upload with the file attached as form-data (key: file).
+
+Train Model: POST request to http://127.0.0.1:5000/train after the file is uploaded.
+
+Make Prediction: POST request to http://127.0.0.1:5000/predict.
